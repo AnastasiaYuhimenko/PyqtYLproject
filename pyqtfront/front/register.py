@@ -34,23 +34,20 @@ class RegisterWindow(QtWidgets.QMainWindow):
             QMessageBox.warning(self, "Ошибка", "Введите логин и пароль")
             return
 
-        try:
-            user_add = UserCreate(username=username, password=password)
-            user, success = UserService.register(self.session, user_add)
-            if not success:
-                QMessageBox.information(
-                    self,
-                    "Не успех",
-                    f"Пользователь с таким логином уже существует",
-                )
-            QMessageBox.information(self, "Успех", f"Пользователь создан")
-            self.hide()
-            self.login_window = LoginWindow(self.session)
-            self.login_window.show()
-            self.username_input.clear()
-            self.password_input.clear()
-        except Exception as e:
-            QMessageBox.warning(self, "Ошибка", str(e))
+        user_add = UserCreate(username=username, password=password)
+        user, success = UserService.register(self.session, user_add)
+        if not success:
+            QMessageBox.information(
+                self,
+                "Не успех",
+                f"Пользователь с таким логином уже существует",
+            )
+        QMessageBox.information(self, "Успех", f"Пользователь создан")
+        self.hide()
+        self.login_window = LoginWindow(self.session)
+        self.login_window.show()
+        self.username_input.clear()
+        self.password_input.clear()
 
     def redirect_to_login(self):
         self.hide()

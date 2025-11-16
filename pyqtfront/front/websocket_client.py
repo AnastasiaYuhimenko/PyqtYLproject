@@ -19,7 +19,7 @@ class WebSocketClient:
         self.loop.run_until_complete(self.connect())
 
     async def connect(self):
-        uri = f"ws://localhost:8001/ws/{self.user_id}"
+        uri = f"ws://localhost:8002/ws/{self.user_id}"
         async with websockets.connect(uri) as ws:
             self.ws = ws
             while True:

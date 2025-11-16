@@ -33,23 +33,19 @@ class LoginWindow(QtWidgets.QMainWindow):
             QMessageBox.warning(self, "Ошибка", "Введите логин и пароль")
             return
 
-        try:
-            user_login = UserGet(username=username, password=password)
-            user, success = UserService.login(self.session, user_login)
-            if not success:
-                QMessageBox.warning(self, "Ошибка", "Неправильный логин или пароль")
-                return
+        user_login = UserGet(username=username, password=password)
+        user, success = UserService.login(self.session, user_login)
+        if not success:
+            QMessageBox.warning(self, "Ошибка", "Неправильный логин или пароль")
+            return
 
-            QMessageBox.information(self, "Успех", "Вы вошли в аккаунт")
-            self.username_input.clear()
-            self.password_input.clear()
+        QMessageBox.information(self, "Успех", "Вы вошли в аккаунт")
+        self.username_input.clear()
+        self.password_input.clear()
 
-            self.hide()
-            self.win = ChatWindow(self.session, user)
-            self.win.show()
-            self.win.show()
-            self.username_input.clear()
-            self.password_input.clear()
-
-        except Exception as e:
-            QMessageBox.warning(self, "Ошибка", str(e))
+        self.hide()
+        self.win = ChatWindow(self.session, user)
+        self.win.show()
+        self.win.show()
+        self.username_input.clear()
+        self.password_input.clear()
