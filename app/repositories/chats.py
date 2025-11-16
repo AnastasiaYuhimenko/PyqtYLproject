@@ -93,3 +93,14 @@ class ChatRepository:
                 session.commit()
                 return True
         return False
+
+    @staticmethod
+    def edit_message(session: Session, message_id: int, new_text: str) -> Message:
+        msg = session.get(Message, message_id)
+        if not msg:
+            raise ValueError("Сообщение не найдено")
+        msg.text = new_text
+        session.add(msg)
+        session.commit()
+        session.refresh(msg)
+        return msg
