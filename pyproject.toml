@@ -1,0 +1,59 @@
+[tool.ruff]
+# Базовые настройки
+line-length = 88
+indent-width = 4
+target-version = "py311"
+
+# Исключения
+exclude = [
+    ".bzr",
+    ".direnv", 
+    ".eggs",
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "alembic",
+]
+
+[tool.ruff.lint]
+select = [
+    "E4",   
+    "E7",   
+    "E9",   
+    "F",    
+    "B",    
+    "I",    
+    "UP",   
+    "C4",   
+    "SIM",  
+    "FAST001",
+    "FAST002",
+]
+
+ignore = [
+    "E501", 
+    "B008",
+]
+
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
